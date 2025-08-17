@@ -15,3 +15,8 @@ reports/
 # IDE
 .vscode/
 .idea/
+
+ui-playwright-ts/node_modules/
+ui-playwright-ts/playwright-report/
+ui-playwright-ts/test-results/
+
