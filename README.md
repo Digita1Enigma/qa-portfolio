@@ -1,7 +1,10 @@
 # Project 1 — API QA Boost (pytest + requests + jsonschema)
 
-Готовый старт для API‑тестов по публичным сервисам: JSONPlaceholder и ReqRes.
-Включает фикстуры, параметризацию, проверку схем и HTML‑отчёт pytest‑html.
+API тесты, Python/pytest/requests/jsonschema, есть HTML-отчёт
+Topics: qa, testing, pytest, api-testing, python.
+
+Скриншот ![bandicam 2025-08-17 11-24-40-757](https://github.com/user-attachments/assets/e07bbb33-baab-4409-963e-58c61ab7a8a2)
+
 
 ## Быстрый запуск
 ```bash
