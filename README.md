@@ -1,42 +1,83 @@
-# QA Portfolio — Владислав Горбачёв (Digita1Enigma)
+# QA Portfolio — Владислав Горбачёв
 
-Набор учебных проектов по тестированию (API, UI, SQL).
-
-## 📌 Проекты
-
-### 1. API QA Boost (pytest + requests)
-**Папка:** `project1_api_qa_boost`  
-- Автотесты для API Reqres и JSONPlaceholder.  
-- Позитивные и негативные сценарии.  
-- HTML-отчёты через pytest-html.  
-- Пример баг-репорта и тестовой документации.
+Добро пожаловать в моё портфолио по тестированию.  
+Здесь собраны учебные проекты, демонстрирующие навыки в **API, SQL и UI тестировании**, а также интеграцию с CI/CD.
 
 ---
 
-### 2. UI Playwright Smoke (TypeScript)
-**Папка:** `project2_ui_playwright_smoke`  
-- Автотесты UI для сайта [saucedemo.com](https://www.saucedemo.com).  
-- Проверка логина и отображения списка товаров.  
-- Настроен CI/CD в GitHub Actions (артефакт — HTML-отчёт).  
+## 🔹 Стек
+- Python (pytest, requests, jsonschema)
+- SQLite (data quality проверки)
+- Playwright (TypeScript, E2E UI-тесты)
+- HTML-отчёты, GitHub Actions
 
 ---
 
-### 3. SQL / Data Quality (pytest + SQLite)
-**Папка:** `project3_sql_data_quality`  
-- Создана тестовая база данных SQLite.  
-- Тесты проверяют корректность связей (user → order).  
-- Негативные проверки на пустые и некорректные данные.  
-- Подходит как демонстрация работы с SQL в QA.
+## 🔹 Проекты
+
+### [Project 1 — API QA Boost](./project1_api_qa_boost)
+**Стек:** Python + pytest + requests  
+- Тесты публичного API JSONPlaceholder  
+- Проверка статус-кодов и JSON-структуры  
+- HTML-отчёты (`pytest-html`)
+
+📂 Основное: `tests/test_jsonplaceholder_posts.py`
 
 ---
 
-## 🚀 Быстрый старт
-- Смотрите README внутри каждой папки проекта.  
-- Запуск тестов через `pytest -v` или `npx playwright test`.  
-- CI: UI-смоук запускается автоматически при пуше в `project2_ui_playwright_smoke/**`.
+### [Project 2 — API Schema Validation](./project2_api_schema)
+**Стек:** Python + pytest + requests + jsonschema  
+- Проверка API `catfact.ninja` и `agify.io`  
+- Валидация ответов по JSON Schema  
+- Позитивные и негативные проверки  
+
+📂 Основное: `tests/test_catfacts_schema.py`, `tests/test_agify_schema.py`
 
 ---
 
-## 📞 Контакты
-- Telegram: [@Digita1Enigma](https://t.me/Digita1Enigma)  
-- GitHub: [https://github.com/Digita1Enigma](https://github.com/Digita1Enigma)  
+### [Project 3 — SQL / Data Quality](./project3_sql_data_quality)
+**Стек:** Python + pytest + SQLite  
+- Проверка ограничений и связей в БД  
+- Валидация бизнес-правил:  
+  - `orders.total = сумма позиций`  
+  - уникальные email/sku  
+  - положительные цены/количество  
+- Нарушения вызывают `IntegrityError`  
+
+📂 Основное: `scripts/init_db.py`, `tests/test_data_quality.py`
+
+---
+
+### [Project 4 — UI E2E Tests (Playwright)](./project2_ui_playwright_smoke)
+**Стек:** Playwright + TypeScript  
+- E2E-тесты магазина [saucedemo.com](https://www.saucedemo.com)  
+- Сценарии:  
+  - ✅ Успешный логин  
+  - ❌ Негативный логин  
+  - 🛒 Добавление товара в корзину  
+  - ↕️ Сортировка по цене и имени  
+  - 🚪 Логаут  
+- Отчёты Playwright Report  
+- CI/CD (GitHub Actions)
+
+📂 Основное: `tests/auth.spec.ts`, `tests/cart.spec.ts`, `tests/sort.spec.ts`, `tests/logout.spec.ts`
+
+---
+
+## 🔹 Как запускать локально
+
+### API/SQL проекты (pytest)
+```bash
+# установка зависимостей
+pip install -r requirements.txt
+
+# запуск тестов
+pytest -v <папка_проекта>/tests --html=reports/report.html --self-contained-html
+
+UI проект (Playwright)
+
+cd project2_ui_playwright_smoke
+npm install
+npx playwright install
+npx playwright test
+npx playwright show-report
