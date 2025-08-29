@@ -81,3 +81,9 @@ npm install
 npx playwright install
 npx playwright test
 npx playwright show-report
+
+## Test documentation (SauceDemo)
+- [Check-list: login → cart → checkout](docs/checklist_saucedemo_login_cart.md)
+- [Bug report: cart counter doesn’t update](docs/bugreport_saucedemo_cart_qty.md)
+- [Bug report: back after logout opens cached page](docs/bugreport_saucedemo_logout_back.md)
+- [Test cases: core flows](docs/testcases_saucedemo_core.md)
