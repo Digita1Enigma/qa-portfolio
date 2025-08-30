@@ -1,0 +1,213 @@
+{
+	"id": "aacf8984-53a2-4e5f-819d-be7697387909",
+	"name": "QA Portfolio API Collection (JSONPlaceholder + ReqRes)",
+	"timestamp": "2025-08-30T04:32:17.285Z",
+	"collection_id": "48011241-c8dc22a3-d73e-4f7a-9131-73ef39b37229",
+	"folder_id": 0,
+	"environment_id": "48011241-5fb50d0d-c3ea-43d1-8c2c-23dc0083febb",
+	"totalPass": 7,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-08-30T04:32:15.535Z",
+	"totalFail": 4,
+	"results": [
+		{
+			"id": "66183041-a58b-4efd-a813-d9e345aaca9b",
+			"name": "GET /posts (list)",
+			"url": "https://jsonplaceholder.typicode.com/posts",
+			"time": 134,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response is array with length > 0": true,
+				"First item has userId, id, title": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is array with length > 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"First item has userId, id, title": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				134
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response is array with length > 0": true,
+					"First item has userId, id, title": true
+				}
+			]
+		},
+		{
+			"id": "51eceee8-2d24-4404-98fe-89d8972b360b",
+			"name": "POST /posts (create)",
+			"url": "https://jsonplaceholder.typicode.com/posts",
+			"time": 188,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status 201": true,
+				"Response has id": true
+			},
+			"testPassFailCounts": {
+				"Status 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has id": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				188
+			],
+			"allTests": [
+				{
+					"Status 201": true,
+					"Response has id": true
+				}
+			]
+		},
+		{
+			"id": "f97fad76-236f-4343-899f-b4a64b08a25a",
+			"name": "GET /users?page=2",
+			"url": "https://reqres.in/api/users?page=2/users?page=2",
+			"time": 293,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Response has JSON body": true,
+				"Response contains users": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response has JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains users": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				293
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Response has JSON body": true,
+					"Response contains users": false
+				}
+			]
+		},
+		{
+			"id": "cfdcd6aa-b0b0-47fc-b601-721faff6539e",
+			"name": "POST /login (negative: missing password)",
+			"url": "https://reqres.in/api/users?page=2/login",
+			"time": 221,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 201": false,
+				"Response contains id": false
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response contains id": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				221
+			],
+			"allTests": [
+				{
+					"Status code is 201": false,
+					"Response contains id": false
+				}
+			]
+		},
+		{
+			"id": "d9dd4edd-f768-431d-99cc-8b403707fbb9",
+			"name": "POST /login (positive)",
+			"url": "https://reqres.in/api/users?page=2/login",
+			"time": 104,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Negative case: status is 400 or 401": true
+			},
+			"testPassFailCounts": {
+				"Negative case: status is 400 or 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				104
+			],
+			"allTests": [
+				{
+					"Negative case: status is 400 or 401": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 940,
+	"collection": {
+		"requests": [
+			{
+				"id": "66183041-a58b-4efd-a813-d9e345aaca9b",
+				"method": "GET"
+			},
+			{
+				"id": "51eceee8-2d24-4404-98fe-89d8972b360b",
+				"method": "POST"
+			},
+			{
+				"id": "f97fad76-236f-4343-899f-b4a64b08a25a",
+				"method": "GET"
+			},
+			{
+				"id": "cfdcd6aa-b0b0-47fc-b601-721faff6539e",
+				"method": "POST"
+			},
+			{
+				"id": "d9dd4edd-f768-431d-99cc-8b403707fbb9",
+				"method": "POST"
+			}
+		]
+	}
+}

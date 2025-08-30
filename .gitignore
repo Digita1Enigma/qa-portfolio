@@ -5,12 +5,14 @@ __pycache__/
 *.pyd
 .pytest_cache/
 
-# Виртуальное окружение
+# venv
 .venv/
 
 # Отчёты и артефакты
 *.html
 reports/
+playwright-report/
+test-results/
 
 # IDE
 .vscode/
