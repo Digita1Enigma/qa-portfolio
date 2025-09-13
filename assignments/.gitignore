@@ -1,0 +1,16 @@
+@"
+# OS/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Postman/секреты
+*.har
+*.log
+*environment*.json
+
+# Крупные/временные
+*.mp4
+*.zip
+"@ | Set-Content .gitignore
