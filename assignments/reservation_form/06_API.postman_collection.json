@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "1f7bb7f5-041c-41d9-acc8-bae48b34c9a7",
+		"name": "Assignment — Users API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48011241",
+		"_collection_link": "https://www.postman.com/digita1enigma-7641794/workspace/qa-vlad/collection/48011241-1f7bb7f5-041c-41d9-acc8-bae48b34c9a7?action=share&source=collection_link&creator=48011241"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"uniqEmail\", `vlad+${Date.now()}@example.com`);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 201\", () => pm.response.code === 201);\r",
+							"pm.test(\"Body matches schema\", () => {\r",
+							"  const schema = {\r",
+							"    type: \"object\",\r",
+							"    required: [\"id\", \"name\", \"username\", \"email\", \"phone\", \"website\"],\r",
+							"    properties: {\r",
+							"      id: { type: \"integer\" },\r",
+							"      name: { type: \"string\" },\r",
+							"      username: { type: \"string\" },\r",
+							"      email: { type: \"string\" },\r",
+							"      phone: { type: \"string\" },\r",
+							"      website: { type: \"string\" }\r",
+							"    }\r",
+							"  };\r",
+							"  pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"username\": \"johndoe\",\r\n  \"email\": \"john@example.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"website\": \"johndoe.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
