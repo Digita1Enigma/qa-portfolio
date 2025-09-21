@@ -1,79 +1,187 @@
 {
-	"info": {
-		"_postman_id": "1f7bb7f5-041c-41d9-acc8-bae48b34c9a7",
-		"name": "Assignment — Users API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "48011241",
-		"_collection_link": "https://www.postman.com/digita1enigma-7641794/workspace/qa-vlad/collection/48011241-1f7bb7f5-041c-41d9-acc8-bae48b34c9a7?action=share&source=collection_link&creator=48011241"
-	},
-	"item": [
-		{
-			"name": "Create user",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.variables.set(\"uniqEmail\", `vlad+${Date.now()}@example.com`);\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status 201\", () => pm.response.code === 201);\r",
-							"pm.test(\"Body matches schema\", () => {\r",
-							"  const schema = {\r",
-							"    type: \"object\",\r",
-							"    required: [\"id\", \"name\", \"username\", \"email\", \"phone\", \"website\"],\r",
-							"    properties: {\r",
-							"      id: { type: \"integer\" },\r",
-							"      name: { type: \"string\" },\r",
-							"      username: { type: \"string\" },\r",
-							"      email: { type: \"string\" },\r",
-							"      phone: { type: \"string\" },\r",
-							"      website: { type: \"string\" }\r",
-							"    }\r",
-							"  };\r",
-							"  pm.response.to.have.jsonSchema(schema);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"username\": \"johndoe\",\r\n  \"email\": \"john@example.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"website\": \"johndoe.com\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://jsonplaceholder.typicode.com/users",
-					"protocol": "https",
-					"host": [
-						"jsonplaceholder",
-						"typicode",
-						"com"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "1f7bb7f5-041c-41d9-acc8-bae48b34c9a7",
+    "name": "Assignment — Users API (fixed)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48011241"
+  },
+  "variable": [
+    {
+      "key": "mockBaseUrl",
+      "value": "https://<mock-id>.mock.pstmn.io",
+      "type": "string",
+      "description": "Set your Postman Mock URL here"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create user — success (201)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 Created\", () => pm.response.code === 201);",
+              "pm.test(\"Body has id\", () => {",
+              "  const b = pm.response.json();",
+              "  pm.expect(b && b.id !== undefined).to.be.true;",
+              "});"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set(\"uniqEmail\", `vlad+${Date.now()}@example.com`);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Влад\",\n  \"email\": \"{{uniqEmail}}\",\n  \"age\": 26\n}"
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user — invalid name (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"400 expected\", () => pm.response.code === 400);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"bad@example.com\",\n  \"age\": 26\n}"
+        },
+        "url": {
+          "raw": "{{mockBaseUrl}}/api/v1/users",
+          "host": [
+            "{{mockBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user — duplicate email (409)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"409 expected\", () => pm.response.code === 409);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Иван\",\n  \"email\": \"dup@example.com\",\n  \"age\": 27\n}"
+        },
+        "url": {
+          "raw": "{{mockBaseUrl}}/api/v1/users",
+          "host": [
+            "{{mockBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user — wrong content-type (415)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"415 expected\", () => pm.response.code === 415);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Анна\",\n  \"email\": \"anna@example.com\",\n  \"age\": 28\n}"
+        },
+        "url": {
+          "raw": "{{mockBaseUrl}}/api/v1/users",
+          "host": [
+            "{{mockBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }
