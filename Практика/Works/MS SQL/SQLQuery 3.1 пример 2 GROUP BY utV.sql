@@ -1,0 +1,1 @@
+select v_color from utv group by v_color;

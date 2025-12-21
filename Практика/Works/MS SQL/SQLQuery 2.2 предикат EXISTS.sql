@@ -1,0 +1,4 @@
+SELECT 1 a WHERE
+EXISTS(SELECT MAX(price)
+FROM pc
+WHERE price<0);

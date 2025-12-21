@@ -1,0 +1,1 @@
+select distinct v_color from utv;

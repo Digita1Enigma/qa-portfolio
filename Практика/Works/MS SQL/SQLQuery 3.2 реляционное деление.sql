@@ -1,0 +1,1 @@
+Product [maker, type] DIVIDE by product[type]
